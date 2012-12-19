@@ -1191,8 +1191,14 @@
                 isHoveringRight = isHoveringLeft = p3drag = p0drag = false;
 
                 // manual page turning, check if jQuery UI is loaded
-                if (target.data('draggable')) target.find('.b-page').draggable('destroy');
-                target.find('.b-page').removeClass('b-grab b-grabbing');
+                // Heavy fix for latest jQuery/UI
+                /*target.find('.b-page').each(function (i, elm) {
+                  try {
+                    $(elm).removeClass('b-grab b-grabbing').draggable('destroy')
+                  } catch (e) { }
+                });*/
+                // Ligther fix
+                target.find('.b-page.ui-draggable').removeClass('b-grab b-grabbing').draggable('destroy')
                 
                 if(options.manual && $.ui) {
 
@@ -1515,8 +1521,14 @@
             },
             destroyManualControls = function () {
                 // remove old draggables
-                if (target.data('draggable')) target.find('.b-page').draggable('destroy');
-                target.find('.b-page').removeClass('b-grab b-grabbing');
+                // Heavy fix for latest jQuery/UI
+                /*target.find('.b-page').each(function (i, elm) {
+                  try {
+                    $(elm).removeClass('b-grab b-grabbing').draggable('destroy')
+                  } catch (e) { }
+                });*/
+                // Ligther fix
+                target.find('.b-page.ui-draggable').removeClass('b-grab b-grabbing').draggable('destroy')
                 
                 // remove mouse tracking for page movement
                 target.unbind('.booklet');
